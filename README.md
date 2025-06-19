@@ -260,9 +260,6 @@ if (current_time - last_gesture_timestamp) > 2.0:  # Longer cooldown
 3. **Low Recognition Accuracy**: Check lighting conditions and gesture positioning
 4. **System Actions Not Working**: Verify platform-specific command paths
 
-## 📝 License
-
-This project is open source and available under the MIT License.
 
 ## 🤝 Contributing
 
@@ -274,4 +271,3 @@ For questions and support, please open an issue in the repository or refer to th
 
 ---
 
-**Built with ❤️ using Google MediaPipe**
