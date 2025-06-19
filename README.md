@@ -11,7 +11,7 @@ This project leverages Google's MediaPipe framework, a powerful cross-platform f
 - [MediaPipe Hand Solutions](https://developers.google.com/mediapipe/solutions/vision/hand_landmarker)
 - [MediaPipe Model Maker](https://developers.google.com/mediapipe/solutions/model_maker)
 - [MediaPipe GitHub Repository](https://github.com/google/mediapipe)
-
+-[MediaPipe-samples GitHub Repository](https://github.com/google-ai-edge/mediapipe-samples.git)
 ## 🎯 Project Overview
 
 This system consists of two main components:
@@ -86,7 +86,6 @@ dataset/
 
 #### Why Google Colab?
 - **Pre-installed Dependencies**: MediaPipe Model Maker comes pre-configured
-- **GPU Acceleration**: Free access to GPU for faster training
 - **No Environment Issues**: Eliminates local setup complications
 - **Easy Data Upload**: Simple file upload interface
 - **Automatic Model Export**: Direct download of trained models
@@ -109,7 +108,7 @@ dataset/
 
 ### Installation
 ```bash
-pip install mediapipe opencv-python pyautogui
+pip install mediapipe mediapipe-model-maker opencv-python pyautogui
 ```
 
 ### 🎯 Gesture Recognition & System Control
@@ -207,9 +206,6 @@ python gesture_app.py
 - **Resource Management**: Proper cleanup of camera and model resources
 - **Cross-platform Compatibility**: Handles different operating system requirements
 
-## 🎬 Demo Video
-
-*[Sample video will be uploaded demonstrating the gesture recognition system in action]*
 
 ## 🔧 Customization
 
