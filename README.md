@@ -220,5 +220,3 @@ Contributions are welcome! Please feel free to submit pull requests or open issu
 For questions and support, please open an issue in the repository or refer to the MediaPipe documentation for technical details.
 
 ---
-
-**Built with ❤️ using Google MediaPipe**
