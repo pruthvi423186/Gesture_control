@@ -55,8 +55,15 @@ model_options = gesture_recognizer.ModelOptions(
 )
 ```
 
-### 📊 Dataset Structure
-The training expects a folder structure like:
+### 📊 Dataset
+
+This project uses a comprehensive ASL gesture dataset from Roboflow:
+
+**Dataset Link**: [ASL Gesture Dataset](https://universe.roboflow.com/ds/gE2TzpqR3J?key=PteZiresb6)
+
+The dataset contains images for all 26 letters of the American Sign Language alphabet (A-Z), providing a solid foundation for gesture recognition training.
+
+#### Dataset Structure:
 ```
 dataset/
 ├── A/
@@ -66,7 +73,9 @@ dataset/
 ├── B/
 │   ├── image1.jpg
 │   └── ...
-└── ... (for each gesture class)
+├── C/
+├── D/
+└── ... (continues for all 26 letters A-Z)
 ```
 
 ### 🌐 Google Colab Training
@@ -108,13 +117,34 @@ pip install mediapipe opencv-python pyautogui
 The inference application (`gesture_app.py`) provides real-time gesture recognition with the following features:
 
 #### Supported Gestures & Actions:
-| Gesture | Action | Description |
-|---------|--------|-------------|
-| **C** | Open Edge Browser | Launches Microsoft Edge browser |
-| **L** | Maximize/Restore Window | Toggles current window size |
-| **O** | Open File Explorer | Opens system file manager |
-| **W** | Open YouTube | Opens YouTube in Chrome guest mode |
-| **V** | Open CMD + Virtual Env | Activates Python virtual environment |
+
+**Current Implementation:**
+| Gesture | Action | Description | Mnemonic |
+|---------|--------|-------------|----------|
+| **C** | Open Edge Browser | Launches Microsoft Edge browser | **C**hrome/Browser |
+| **L** | Maximize/Restore Window | Toggles current window size | **L**arge/maximize |
+| **O** | Open File Explorer | Opens system file manager | **O**pen files |
+| **W** | Open YouTube | Opens YouTube in Chrome guest mode | **W**atch videos |
+| **V** | Open CMD + Virtual Env | Activates Python virtual environment | **V**irtual environment |
+
+**Available Gestures for Customization:**
+The system recognizes all 26 ASL letters (A-Z), but currently only implements 5 actions. You can easily customize and add actions for the remaining 21 letters based on your specific needs.
+
+**Suggested Customizations:**
+- **A** → **A**pplications menu
+- **B** → **B**rowser (different browser)
+- **D** → **D**esktop/Show desktop
+- **E** → **E**ditor (text editor)
+- **F** → **F**iles (different file manager)
+- **G** → **G**ames folder
+- **H** → **H**ome directory
+- **I** → **I**nformation/System info
+- **M** → **M**usic player
+- **N** → **N**otepad
+- **P** → **P**owerShell
+- **S** → **S**creenshot
+- **T** → **T**erminal
+- And so on...
 
 #### 🔧 Key Features:
 
@@ -183,8 +213,35 @@ python gesture_app.py
 
 ## 🔧 Customization
 
-### Adding New Gestures:
-1. **Collect Data**: Gather images for new gesture classes
+### Adding Actions for Existing Gestures:
+
+The system already recognizes all 26 ASL letters but only implements actions for 5 of them. You can easily add actions for any of the remaining letters by modifying the `print_and_draw_results()` function in `gesture_app.py`.
+
+**Example - Adding action for letter 'A':**
+```python
+elif current_gesture.upper() == "A" or current_gesture.lower() == "a":
+    print(f"Action: Open Applications Menu (Confidence: {current_confidence:.2f})")
+    try:
+        if platform.system() == "Windows":
+            pyautogui.hotkey('win')  # Open Start menu
+        elif platform.system() == "Darwin":  # macOS
+            pyautogui.hotkey('cmd', 'space')  # Open Spotlight
+        elif platform.system() == "Linux":
+            pyautogui.hotkey('alt', 'f1')  # Open applications menu
+    except Exception as e:
+        print(f"Error opening applications menu: {e}")
+    last_triggered_gesture = current_gesture
+    last_gesture_timestamp = current_time
+```
+
+**Tips for Gesture-Action Mapping:**
+- **Use mnemonics**: Choose gestures that relate to the action (C for Camera, O for Open, etc.)
+- **Consider frequency**: Map commonly used actions to easier gestures
+- **Platform compatibility**: Ensure actions work across different operating systems
+- **User workflow**: Design mappings that match your specific workflow needs
+
+### Adding New Gesture Classes:
+1. **Expand Dataset**: Add new gesture images to your training dataset
 2. **Retrain Model**: Use the Colab notebook to retrain with expanded dataset
 3. **Update Code**: Add new gesture conditions in `print_and_draw_results()` function
 4. **Define Actions**: Implement corresponding system actions
@@ -220,3 +277,5 @@ Contributions are welcome! Please feel free to submit pull requests or open issu
 For questions and support, please open an issue in the repository or refer to the MediaPipe documentation for technical details.
 
 ---
+
+**Built with ❤️ using Google MediaPipe**
